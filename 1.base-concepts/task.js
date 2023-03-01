@@ -1,10 +1,33 @@
-"use strict"
+"use strict";
+
 function solveEquation(a, b, c) {
-  let arr = [];
-  
-  return arr;
+  	let arr = [];
+    let d = (b ** 2) - (4 * a * c);
+	if (d === 0) {		
+		let x = -b / (2 * a);
+		arr.push(x);
+	} else if (d > 0) {
+	    let firstX = (-b + Math.sqrt(d))/(2 * a);
+	    let secondX = (-b - Math.sqrt(d))/(2 * a);
+		arr.push(firstX, secondX);	 		
+	} else {
+	}
+	return arr;
 }
 
-function calculateTotalMortgage(percent, contribution, amount, countMonths) {
-  
-}
+ function calculateTotalMortgage(percent, contribution, amount, countMonths) {
+	let per = parseInt(percent)/100/12;
+	if (isNaN(per) || per < 0) {
+	  return false;
+	} else if (isNaN(contribution) || contribution < 0) {
+	  return false;
+	} else if (isNaN(amount) || amount < 0) {
+	  return false;
+	} else {
+		let sum = amount - contribution;
+		let period = countMonths;
+		let pay = sum * (per + per/(((1 + per) ** period) - 1));
+		let totalAmount = (pay * period).toFixed(2);
+		return Number(totalAmount);
+	}
+  }
